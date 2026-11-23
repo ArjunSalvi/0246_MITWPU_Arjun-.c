@@ -1,39 +1,64 @@
 #include <stdio.h>
-#include <stdlib.h>
+
+struct Robot {
+    float angle, temperature, torque;
+    int status;
+};
 
 int main() {
-    FILE *sourceFile, *destFile;
-    char sourceName[100], destName[100];
-    int ch;
+    struct Robot r;
+    FILE *fp;
+    int n, i;
 
-    printf("Enter source file name: ");
-    scanf("%s", sourceName);
+    fp = fopen("robot.txt", "a");
 
-    printf("Enter destination file name: ");
-    scanf("%s", destName);
+    printf("Enter number of records: ");
+    scanf("%d", &n);
 
-    sourceFile = fopen(sourceName, "r");
-    if (sourceFile == NULL) {
-        printf("Error: Cannot open source file.\n");
-        return 1;
+    for(i = 0; i < n; i++) {
+        printf("\nEnter joint angle: ");
+        scanf("%f", &r.angle);
+
+        printf("Enter motor temperature: ");
+        scanf("%f", &r.temperature);
+
+        printf("Enter torque value: ");
+        scanf("%f", &r.torque);
+
+        printf("Enter status (1=ON, 0=OFF): ");
+        scanf("%d", &r.status);
+
+        fprintf(fp, "%.2f %.2f %.2f %d\n",
+                r.angle, r.temperature,
+                r.torque, r.status);
     }
 
-    destFile = fopen(destName, "w");
-    if (destFile == NULL) {
-        printf("Error: Cannot create destination file.\n");
-        fclose(sourceFile);
-        return 1;
+    fclose(fp);
+
+    fp = fopen("robot.txt", "r");
+
+    printf("\n--- Robot Historical Records ---\n");
+
+    while(fscanf(fp, "%f %f %f %d",
+                 &r.angle, &r.temperature,
+                 &r.torque, &r.status) == 4) {
+
+        printf("\nAngle: %.2f", r.angle);
+        printf("\nTemperature: %.2f", r.temperature);
+        printf("\nTorque: %.2f", r.torque);
+
+        if(r.temperature > 80 || r.torque > 100)
+            printf("\nWARNING: Abnormal Condition!");
+        else
+            printf("\nStatus: Normal");
+
+        if(r.status == 0)
+            printf("\nMotor is OFF");
+
+        printf("\n");
     }
 
-    while ((ch = fgetc(sourceFile)) != EOF) {
-        fputc(ch, destFile);
-    }
-
-    printf("File copied successfully.\n");
-
-
-    fclose(sourceFile);
-    fclose(destFile);
+    fclose(fp);
 
     return 0;
 }
