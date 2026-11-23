@@ -1,8 +1,7 @@
 #include <stdio.h>
 
 int main() {
-    int rows, cols, i,j;
-    printf("Enter number of rows and columns: ");
+    int rows, c
     scanf("%d %d", &rows, &cols);
 
     int A[rows][cols], B[rows][cols], sum[rows][cols];
