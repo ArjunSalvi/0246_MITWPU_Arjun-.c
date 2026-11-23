@@ -1,65 +1,39 @@
 #include <stdio.h>
 
 int main() {
-    int rows, c
-    scanf("%d %d", &rows, &cols);
+    int i, j, r, c;
+    printf("Enter the no. of rows & columns: ");
+    scanf("%d %d", &r, &c);
 
-    int A[rows][cols], B[rows][cols], sum[rows][cols];lements of Matrix B:\n");
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            printf("B[%d][%d]: ", i, j);
-            scanf("%d", &B[i][j]);
-        }
-    }
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            sum[i][j] = A[i][j] + B[i][j];
+    int matA[r][c], matB[r][c], matSum[r][c];
+
+    printf("Enter first matrix:\n");
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            scanf("%d", &matA[i][j]);
         }
     }
 
-    printf("\nSum of the two matrices (A + B):\n");
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            printf("%d\t", sum[i][j]);
-        }
-        printf("\n");
-   }
-#include <stdio.h>
-
-int main() {
-    int rows, cols;
-    printf("Enter number of rows and columns: ");
-    scanf("%d %d", &rows, &cols);
-
-    int A[rows][cols], B[rows][cols], sum[rows][cols];
-    printf("\nEnter elements of Matrix A:\n");
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            printf("A[%d][%d]: ", i, j);
-            scanf("%d", &A[i][j]);
-        }
-    }
-    printf("\nEnter elements of Matrix B:\n");
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            printf("B[%d][%d]: ", i, j);
-            scanf("%d", &B[i][j]);
-        }
-    }
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            sum[i][j] = A[i][j] + B[i][j];
+    printf("Enter second matrix:\n");
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            scanf("%d", &matB[i][j]);
         }
     }
 
-    printf("\nSum of the two matrices (A + B):\n");
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            printf("%d\t", sum[i][j]);
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            matSum[i][j] = matA[i][j] + matB[i][j];
+        }
+    }
+
+    printf("The resultant matrix is:\n");
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            printf("%d\t", matSum[i][j]);
         }
         printf("\n");
     }
 
     return 0;
 }
-  
