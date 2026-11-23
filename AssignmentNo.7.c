@@ -1,39 +1,57 @@
 #include <stdio.h>
 
-struct Student {
-    int rollNo;
-    char name[50];
-    float marks;
+struct Robot
+{
+    int id;
+    char type[30];
+    float capacity, load, time;
 };
 
-int main() {
-    int n;
+int main()
+{
+    int n, i;
+    struct Robot r[10];
 
-    printf("Enter number of students: ");
+    printf("Enter number of robots: ");
     scanf("%d", &n);
-    struct Student s[n];
 
-    for (int i = 0; i < n; i++) {
-        printf("\nEnter details for Student %d:\n", i + 1);
+    for (i = 0; i < n; i++)
+    {
+        printf("\nEnter details for robot %d:\n", i + 1);
         
-        printf("Roll Number: ");
-        scanf("%d", &s[i].rollNo);
-        
-        printf("Name: ");
-        scanf("%s", s[i].name); 
-        
-        printf("Marks (out of 100): ");
-        scanf("%f", &s[i].marks);
+        printf("Robot ID: ");
+        scanf("%d", &r[i].id);
+
+        printf("Robot type: ");
+        scanf("%s", r[i].type);
+
+        printf("Payload Capacity (kg): ");
+        scanf("%f", &r[i].capacity);
+
+        printf("Actual load (kg): ");
+        scanf("%f", &r[i].load);
+
+        printf("Operating time (hours): ");
+        scanf("%f", &r[i].time);
     }
-    printf("\n--- Student Results ---\n");
-    for (int i = 0; i < n; i++) {
-        printf("\nRoll No: %d | Name: %s | Marks: %.2f | Result: ", 
-               s[i].rollNo, s[i].name, s[i].marks);
+
+    printf("\n");
+    printf("ID\tType\tCapacity\tLoad\tTime\tUtil\tStatus\n");
+
+    for (i = 0; i < n; i++)
+    {
+        float util = (r[i].load / r[i].capacity) * 100;
         
-        if (s[i].marks >= 40.0) {
-            printf("PASS\n");
-        } else {
-            printf("FAIL\n");
+        printf("%d\t%s\t%.2f\t%.2f\t%.2f\t%.2f\t", 
+               r[i].id, r[i].type, r[i].capacity, r[i].load, r[i].time, util);
+
+        if (r[i].load > r[i].capacity)
+        {
+            printf("Overloaded\n");
+        }
+        else
+        {
+            printf("Within limit\n");
         }
     }
 
